@@ -8,15 +8,17 @@ RUN apt-get update && apt-get install -y libpq-dev libicu-dev zlib1g-dev libpng-
     && docker-php-ext-configure pgsql \
     && docker-php-ext-install pgsql pdo_pgsql zip gd soap \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
-    && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-install intl
 
-RUN pecl install xdebug \
-&& docker-php-ext-enable xdebug
+RUN pecl install xdebug redis \
+&& docker-php-ext-enable xdebug \
+&& docker-php-ext-enable redis.so \
+&& rm -r /tmp/pear
 
 # We'll need generate a locale which is necessary for PHPUnit
 RUN echo "en_AU.UTF-8 UTF-8" >> /etc/locale.gen \
-&& apt-get update && apt-get install -y locales
+&& apt-get update && apt-get install -y locales \
+&& rm -r /var/lib/apt/lists/*
 
 RUN apt-get clean
 
