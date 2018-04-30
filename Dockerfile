@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y libpq-dev libicu-dev zlib1g-dev libpng-
     && docker-php-ext-configure pgsql \
     && docker-php-ext-install pgsql pdo_pgsql zip gd soap \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl
+    && docker-php-ext-install intl \
+    && docker-php-ext-install xmlrpc \
+    && docker-php-ext-install opcache
 
 RUN pecl install xdebug redis \
 && docker-php-ext-enable xdebug \
