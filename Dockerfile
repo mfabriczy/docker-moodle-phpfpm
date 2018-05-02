@@ -4,13 +4,14 @@ RUN mkdir /var/moodledata \
 && mkdir /var/moodle_behat_output \
 && chmod 777 /var/moodledata
 
-RUN apt-get update && apt-get install -y libpq-dev libicu-dev zlib1g-dev libpng-dev libxml2-dev php-soap \
+RUN apt-get update && apt-get install -y libpq-dev libicu-dev zlib1g-dev libpng-dev libxml2-dev php-soap libxslt-dev \
     && docker-php-ext-configure pgsql \
     && docker-php-ext-install pgsql pdo_pgsql zip gd soap \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
     && docker-php-ext-install xmlrpc \
-    && docker-php-ext-install opcache
+    && docker-php-ext-install opcache \
+    && docker-php-ext-install xsl
 
 RUN pecl install xdebug redis \
 && docker-php-ext-enable xdebug \
