@@ -1,4 +1,4 @@
-FROM php:7.1-fpm-alpine
+FROM php:7.2-fpm-alpine
 
 RUN mkdir /var/moodledata \
 && mkdir /var/moodle_behat_output \
